@@ -14,7 +14,7 @@ luxmedsniper:
       enabled: True
   lookup_time_days: 14 # How many days from now should script look at.
   facilities_ids: []
-  notification_provider: # console, console_async, slack, pushover, pushbullet, gi, telegram
+  notification_provider: # console, console_async, slack, pushover, pushbullet, gi, telegram, ntfy
     - telegram
 pushover:
   user_key: # Your pushover.net user key
@@ -31,6 +31,12 @@ pushbullet:
   title: "New Lux Med visit available!"
 telegram:
   tele_conf_path: telegram-luxmed-notifier.conf # Your telegram_send config file path
+  message_template: "{name} - {AppointmentDate} at {ClinicPublicName} - {DoctorName}"
+ntfy:
+  server: # ntfy server, by default https://ntfy.sh will be used
+  access_token: # ntfy access token, if used
+  topic:  # ntfy topic under which notification will be sent
+  title: "New appointments"
   message_template: "{name} - {AppointmentDate} at {ClinicPublicName} - {DoctorName}"
 console:
   message_template: "{name} - {AppointmentDate} at {ClinicPublicName} - {DoctorName}"

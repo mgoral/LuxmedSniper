@@ -107,6 +107,11 @@
     },
     "ntfy": {
       "properties": {
+        server: {
+            default: "https://ntfy.sh"
+        },
+        access_token: {},
+        "title": {},
         "topic": {},
         "message_template": {}
       }

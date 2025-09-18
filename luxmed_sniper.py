@@ -96,10 +96,19 @@ class LuxMedSniper:
             )
         if "ntfy" in providers:
             def ntfy_callback(doctor_locator, appointment):
+                ntfy_server = self.config['ntfy'].get('server', 'https://ntfy.sh').strip('/')
+                headers = {
+                    "Tags": "hospital,pill,syringe"},
+                    "Title": self.config['ntfy'].get('title', 'New appointments')
+                }
+
+                if access_token := self.config['ntfy'].get('access_token'):
+                    headers["Authorization"] = f"Bearer {access_token}"
+
                 requests.post(
-                    f"https://ntfy.sh/{self.config['ntfy']['topic']}",
+                    f"{ntfy_server}/{self.config['ntfy']['topic']}",
                     data=self._format_message(self.config['ntfy']['message_template'], doctor_locator, appointment),
-                    headers={"Tags": "hospital,pill,syringe", "Title": "New appointments"},
+                    headers=headers,
                     timeout=10,
                 )
 
